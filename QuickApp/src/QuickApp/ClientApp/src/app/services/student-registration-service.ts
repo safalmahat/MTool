@@ -45,5 +45,8 @@ export class StudentRegistrationService {
   getAllStudent() {
     return this.studentEndpoint.getAllStudentEndpoint<StudentRegistration[]>();
   }
+  importStudents() {
+    return this.studentEndpoint.importStudentEndpoint<StudentRegistration[]>();
+  }
 
 }

@@ -90,6 +90,12 @@ export class StudentComponent {
     this.studentService.getAllStudent().subscribe(students => this.onDataLoadSuccessful(students)), error => this.onDataLoadFailed(error);
   }
 
+  importStudentData() {
+    debugger;
+    this.alertService.startLoadingMessage();
+    this.loadingIndicator = true;
+    this.studentService.importStudents().subscribe(students => this.onDataLoadSuccessful(students)), error => this.onDataLoadFailed(error);
+  }
 
   onDataLoadSuccessful(students: StudentRegistration[]) {
     debugger;

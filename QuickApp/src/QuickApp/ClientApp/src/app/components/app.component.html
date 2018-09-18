@@ -20,7 +20,7 @@
             <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink=""><span class="glyphicon glyphicon-home"></span></a></li>
             <li routerLinkActive="active" *ngIf="canViewCustomers"><a routerLink="/customers">{{'mainMenu.Customers' | translate}}</a></li>
             <li routerLinkActive="active" *ngIf="canViewProducts"><a routerLink="/products">{{'mainMenu.Products' | translate}}</a></li>
-            <li routerLinkActive="active" *ngIf="canViewStudent"><a routerLink="/student">Student</a></li>
+            <li routerLinkActive="active"><a routerLink="/student">Student</a></li>
             <li routerLinkActive="active"><a routerLink="/about">{{'mainMenu.About' | translate}}</a></li>
           </ul>
           <ul class="app-component nav navbar-nav nav-pills navBarPadding navbar-right">

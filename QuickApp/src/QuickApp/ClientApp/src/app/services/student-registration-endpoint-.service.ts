@@ -25,6 +25,7 @@ export class StudentEndpoint extends EndpointFactory {
   private readonly _permissionsUrl: string = "/api/account/permissions";
 
   get studentUrl() { return this.configurations.baseUrl + this._studentUrl; }
+  get studentImportUrl() { return this.configurations.baseUrl + this._studentUrl + "/ImportStudents"; }
   get userByUserNameUrl() { return this.configurations.baseUrl + this._userByUserNameUrl; }
   get currentUserUrl() { return this.configurations.baseUrl + this._currentUserUrl; }
   get currentUserPreferencesUrl() { return this.configurations.baseUrl + this._currentUserPreferencesUrl; }
@@ -51,6 +52,12 @@ export class StudentEndpoint extends EndpointFactory {
     return this.http.get<T>(this.studentUrl, this.getRequestHeaders()).pipe<T>(
       catchError(error => {
         return this.handleError(error, () => this.getAllStudentEndpoint(page, pageSize));
+      }));
+  }
+  importStudentEndpoint<T>(): Observable<T> {
+    return this.http.get<T>(this.studentImportUrl, this.getRequestHeaders()).pipe<T>(
+      catchError(error => {
+        return this.handleError(error, () => this.importStudentEndpoint());
       }));
   }
 
