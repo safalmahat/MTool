@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace QuickApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180919012757_UpdateStudentRegistrationInfo")]
-    partial class UpdateStudentRegistrationInfo
+    [Migration("20180919151611_AddForeignKeyChannelIdStudentInfo")]
+    partial class AddForeignKeyChannelIdStudentInfo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

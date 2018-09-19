@@ -64,6 +64,8 @@ namespace DAL
 
             builder.Entity<OrderDetail>().ToTable($"App{nameof(this.OrderDetails)}");
             builder.Entity<StudentRegistrationInfo>().ToTable($"{nameof(this.StudentRegistrationInfo)}");
+            builder.Entity<Channel>().HasData(
+                             new { ChannelName = "Other" });
         }
 
 
