@@ -47,6 +47,7 @@ import { LoginComponent } from "./components/login/login.component";
 import { HomeComponent } from "./components/home/home.component";
 import { CustomersComponent } from "./components/customers/customers.component";
 import { ProductsComponent } from "./components/products/products.component";
+
 import { OrdersComponent } from "./components/orders/orders.component";
 import { SettingsComponent } from "./components/settings/settings.component";
 import { AboutComponent } from "./components/about/about.component";
@@ -98,6 +99,7 @@ import { StudentComponent } from "./components/Student/student.component";
     CustomersComponent,
     ProductsComponent,
     OrdersComponent,
+    StudentComponent,
     SettingsComponent,
     UsersManagementComponent, UserInfoComponent, UserPreferencesComponent,
     RolesManagementComponent, RoleEditorComponent,
@@ -113,8 +115,8 @@ import { StudentComponent } from "./components/Student/student.component";
     BootstrapToggleDirective,
     BootstrapSelectDirective,
     BootstrapDatepickerDirective,
-    GroupByPipe,
-    StudentComponent
+    GroupByPipe
+   
   ],
   providers: [
     { provide: 'BASE_URL', useFactory: getBaseUrl },

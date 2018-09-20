@@ -117,7 +117,7 @@ export class StudentComponent {
   }
   onSearchChanged(value: string) {
     debugger;
-    this.rows = this.rowsCache.filter(r => Utilities.searchArray(value, false, r.firstName, r.lastName,r.token));
+    this.rows = this.rowsCache.filter(r => Utilities.searchArray(value, false, r.FirstName, r.LastName, r.Token));
   }
 
 }

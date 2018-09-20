@@ -12,6 +12,7 @@ import { AlertService, AlertDialog, DialogType, AlertMessage, MessageSeverity } 
 import { NotificationService } from "../services/notification.service";
 import { AppTranslationService } from "../services/app-translation.service";
 import { AccountService } from '../services/account.service';
+import { StudentRegistrationService } from '../services/student-registration-service';
 import { LocalStoreManager } from '../services/local-store-manager.service';
 import { AppTitleService } from '../services/app-title.service';
 import { AuthService } from '../services/auth.service';
@@ -62,7 +63,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 
   constructor(storageManager: LocalStoreManager, private toastaService: ToastaService, private toastaConfig: ToastaConfig,
-    private accountService: AccountService, private alertService: AlertService, private notificationService: NotificationService, private appTitleService: AppTitleService,
+    private accountService: AccountService, private studentService: StudentRegistrationService, private alertService: AlertService, private notificationService: NotificationService, private appTitleService: AppTitleService,
     private authService: AuthService, private translationService: AppTranslationService, public configurations: ConfigurationService, public router: Router) {
 
     storageManager.initialiseStorageSyncListener();
@@ -120,6 +121,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
+    debugger;
     this.isUserLoggedIn = this.authService.isLoggedIn;
 
     // 1 sec to ensure all the effort to get the css animation working is appreciated :|, Preboot screen is removed .5 sec later
