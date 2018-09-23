@@ -29,9 +29,10 @@ namespace QuickApp.Controllers
             _logger = logger;
         }
         [HttpPost]
-        public void Post([FromBody]StudentRegistrationInfo item)
+        public IActionResult Post([FromBody]StudentRegistrationInfo item)
         {
             _unitOfWork.Students.Add(item);
+            return Ok(item);
         }
         [HttpGet]
         public  IActionResult Get()

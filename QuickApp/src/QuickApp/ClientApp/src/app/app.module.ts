@@ -66,6 +66,7 @@ import { RoleEditorComponent } from "./components/controls/role-editor.component
 import { StudentRegistrationService } from "./services/student-registration-service";
 import { StudentEndpoint } from "./services/student-registration-endpoint-.service";
 import { StudentComponent } from "./components/Student/student.component";
+import { StudentdetailregistrationComponent } from './components/studentdetailregistration/studentdetailregistration.component';
 
 
  
@@ -115,7 +116,8 @@ import { StudentComponent } from "./components/Student/student.component";
     BootstrapToggleDirective,
     BootstrapSelectDirective,
     BootstrapDatepickerDirective,
-    GroupByPipe
+    GroupByPipe,
+    StudentdetailregistrationComponent
    
   ],
   providers: [

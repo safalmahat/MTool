@@ -17,6 +17,7 @@ export class StudentRegistration {
 
 
   public Id: string;
+  public ChannnedId: number;
   public Token: string;
   public FirstName: string;
   public MiddleName: string;

@@ -7,7 +7,7 @@ namespace DAL.Models
   public  class StudentRegistrationInfo : AuditableEntity
     {
         public int Id { get; set; }
-        public int ChannelId { get; set; }
+        public int ChannelId { get; set; } = 1;
         public string Token { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -21,7 +21,7 @@ namespace DAL.Models
         public string CompletedFaculty { get; set; }
         public string IntrestedFaculty { get; set; }
         public string Percentage { get; set; }
-        public DateTime DateCreated { get; set; }
-        public DateTime DateModified { get; set; }
+        public DateTime DateCreated { get; set; } = new DateTime();
+        public DateTime DateModified { get; set; } = new DateTime();
     }
 }

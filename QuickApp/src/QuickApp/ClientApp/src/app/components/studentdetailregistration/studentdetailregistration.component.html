@@ -1,0 +1,99 @@
+<div class="container">
+  <header class="pageHeader">
+    <h3><i class="fa fa-shopping-cart fa-lg page-caption" aria-hidden="true"></i> Student Detail Form </h3>
+  </header>
+
+  <div>
+    <form *ngIf="formResetToggle" [attr.autocomplete]="isGeneralEditor ? NaN : null" class="form-horizontal" name="studentInfoForm" #f="ngForm" novalidate
+        (ngSubmit)=save()>
+      <div class="form-group">
+        <label [class.col-md-3]="isViewOnly" [class.col-md-2]="!isViewOnly" class="control-label"></label>
+        <div>
+          <input autofocus type="text" name="jobTitle" placeholder="Enter Token" class="form-control" [(ngModel)]="student.Token" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label [class.col-md-3]="isViewOnly" [class.col-md-2]="!isViewOnly" class="control-label"></label>
+        <div>
+          <input autofocus type="text" name="FirstName" placeholder="Enter First Name" class="form-control" [(ngModel)]="student.FirstName" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label [class.col-md-3]="isViewOnly" [class.col-md-2]="!isViewOnly" class="control-label"></label>
+        <div>
+          <input autofocus type="number" name="ChannelId" placeholder="Enter Channel Id" class="form-control" [(ngModel)]="student.ChannelId" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label [class.col-md-3]="isViewOnly" [class.col-md-2]="!isViewOnly" class="control-label"></label>
+        <div>
+          <input autofocus type="text" name="MiddleName" placeholder="Enter Middle Name" class="form-control" [(ngModel)]="student.MiddleName" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label [class.col-md-3]="isViewOnly" [class.col-md-2]="!isViewOnly" class="control-label"></label>
+        <div>
+          <input autofocus type="text" name="LastName" placeholder="Enter Last Name" class="form-control" [(ngModel)]="student.LastName" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label [class.col-md-3]="isViewOnly" [class.col-md-2]="!isViewOnly" class="control-label"></label>
+        <div>
+          <input autofocus type="text" name="Email" placeholder="Enter Email" class="form-control" [(ngModel)]="student.Email" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label [class.col-md-3]="isViewOnly" [class.col-md-2]="!isViewOnly" class="control-label"></label>
+        <div>
+          <input autofocus type="text" name="PhoneNumber" placeholder="Enter Phone Number" class="form-control" [(ngModel)]="student.PhoneNumber" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label [class.col-md-3]="isViewOnly" [class.col-md-2]="!isViewOnly" class="control-label"></label>
+        <div>
+          <input autofocus type="text" name="Address" placeholder="Enter Address" class="form-control" [(ngModel)]="student.Address" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label [class.col-md-3]="isViewOnly" [class.col-md-2]="!isViewOnly" class="control-label"></label>
+        <div>
+          <input autofocus type="text" name="City" placeholder="Enter City" class="form-control" [(ngModel)]="student.City" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label [class.col-md-3]="isViewOnly" [class.col-md-2]="!isViewOnly" class="control-label"></label>
+        <div>
+          <input autofocus type="text" name="Gender" placeholder="Enter Gender" class="form-control" [(ngModel)]="student.Gender" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label [class.col-md-3]="isViewOnly" [class.col-md-2]="!isViewOnly" class="control-label"></label>
+        <div>
+          <input autofocus type="text" name="CompletedLevel" placeholder="Completed Level" class="form-control" [(ngModel)]="student.CompletedLevel" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label [class.col-md-3]="isViewOnly" [class.col-md-2]="!isViewOnly" class="control-label"></label>
+        <div>
+          <input autofocus type="text" name="CompletedFaculty" placeholder="Enter Completed Faculty" class="form-control" [(ngModel)]="student.CompletedFaculty" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label [class.col-md-3]="isViewOnly" [class.col-md-2]="!isViewOnly" class="control-label"></label>
+        <div>
+          <input autofocus type="text" name="IntrestedFaculty" placeholder="Intrested Faculty" class="form-control" [(ngModel)]="student.IntrestedFaculty" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label [class.col-md-3]="isViewOnly" [class.col-md-2]="!isViewOnly" class="control-label"></label>
+        <div>
+          <input autofocus type="text" name="Percentage" placeholder="Enter Your Percentage" class="form-control" [(ngModel)]="student.Percentage" />
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <button type="submit"class="btn btn-warning unblock-user" ><i class='fa fa-unlock-alt'></i>Save</button>
+
+    </form>
+  </div>
+
+</div>

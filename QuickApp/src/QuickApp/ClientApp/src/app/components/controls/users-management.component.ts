@@ -5,7 +5,7 @@
 
 import { Component, OnInit, AfterViewInit, TemplateRef, ViewChild, Input } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-
+import { fadeInOut } from '../../services/animations';
 import { AlertService, DialogType, MessageSeverity } from '../../services/alert.service';
 import { AppTranslationService } from "../../services/app-translation.service";
 import { AccountService } from "../../services/account.service";
@@ -20,7 +20,8 @@ import { UserInfoComponent } from "./user-info.component";
 @Component({
     selector: 'users-management',
     templateUrl: './users-management.component.html',
-    styleUrls: ['./users-management.component.css']
+    styleUrls: ['./users-management.component.css'],
+    animations: [fadeInOut]
 })
 export class UsersManagementComponent implements OnInit, AfterViewInit {
     columns: any[] = [];
