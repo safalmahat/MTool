@@ -21,6 +21,8 @@ namespace DAL
         IProductRepository _products;
         IOrdersRepository _orders;
         IStudentRepository _students;
+        IChannelRepository _channel;
+        IEnquiryListRepository _enquiryList;
 
 
 
@@ -78,9 +80,29 @@ namespace DAL
                 return _orders;
             }
         }
+        public IChannelRepository Channel
+        {
+            get
+            {
+                if (_channel == null)
+                    _channel = new ChannelRepository(_context);
 
+                return _channel;
+            }
+                
+        }
 
+        public IEnquiryListRepository EnquiryList
+        {
+            get
+            {
+                if (_enquiryList == null)
+                    _enquiryList = new EnquiryListRepository(_context);
 
+                return _enquiryList;
+            }
+
+        }
 
         public int SaveChanges()
         {

@@ -23,6 +23,8 @@ namespace DAL
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Channel> Channel { get; set; }
+        public DbSet<EnquiryList> EnquiryList { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<StudentRegistrationInfo> StudentRegistrationInfo { get; set; }
 
@@ -64,6 +66,8 @@ namespace DAL
 
             builder.Entity<OrderDetail>().ToTable($"App{nameof(this.OrderDetails)}");
             builder.Entity<StudentRegistrationInfo>().ToTable($"{nameof(this.StudentRegistrationInfo)}");
+            builder.Entity<Channel>().ToTable($"{nameof(this.Channel)}");
+            builder.Entity<EnquiryList>().ToTable($"{nameof(this.EnquiryList)}");
             builder.Entity<Channel>().HasData(
                              new {Id = 1, ChannelName = "Other", UpdatedDate = new DateTime(), CreatedDate = new DateTime() });
         }

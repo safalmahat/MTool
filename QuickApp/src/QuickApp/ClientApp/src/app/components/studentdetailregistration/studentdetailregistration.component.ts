@@ -1,6 +1,7 @@
 import { Component,OnInit,ViewChild,Input } from '@angular/core';
 import { fadeInOut } from '../../services/animations';
 import { StudentRegistration } from '../../models/student-registration-model';
+import { StudentEditRegistration } from '../../models/student.edit.model';
 import { AlertService, MessageSeverity } from '../../services/alert.service';
 import { ConfigurationService } from '../../services/configuration.service';
 import { StudentRegistrationService } from '../../services/student-registration-service';
@@ -18,7 +19,7 @@ export class StudentdetailregistrationComponent implements OnInit {
   private showValidationErrors = false;
   private isEditingSelf = false;
   private student: StudentRegistration = new StudentRegistration();
-  private studentEdit: StudentRegistration;
+  private studentEdit: StudentEditRegistration;
   public changesSavedCallback: () => void;
   public changesFailedCallback: () => void;
   public changesCancelledCallback: () => void;
@@ -85,12 +86,12 @@ newUser() {
 private edit() {
   debugger;
   if (!this.isGeneralEditor) {
-      this.studentEdit = new StudentRegistration();
+      this.studentEdit = new StudentEditRegistration();
       Object.assign(this.studentEdit, this.student);
   }
   else {
       if (!this.studentEdit)
-          this.studentEdit = new StudentRegistration();
+          this.studentEdit = new StudentEditRegistration();
   }
 
   this.isEditMode = true;

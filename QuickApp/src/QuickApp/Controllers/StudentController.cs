@@ -31,7 +31,20 @@ namespace QuickApp.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]StudentRegistrationInfo item)
         {
+
+            StudentRegistrationInfo registeredStudent = _unitOfWork.Students.GetAll().Where(sd => sd.PhoneNumber == item.PhoneNumber).FirstOrDefault();
             _unitOfWork.Students.Add(item);
+            if (registeredStudent != null)
+            {
+                EnquiryList enquiryList = new EnquiryList
+                {
+                    StudentId = item.Id,
+                    ChannelId = registeredStudent.ChannelId
+                    
+                };
+                _unitOfWork.EnquiryList.Add(enquiryList);
+            }
+        
             return Ok(item);
         }
         [HttpGet]
@@ -57,21 +70,37 @@ namespace QuickApp.Controllers
 
                 for (int i = 2; i <= totalRows; i++)
                 {
-                    studentList.Add(new StudentRegistrationInfo
+                    StudentRegistrationInfo duplicateRegistrationInfo =null;
+                    if (workSheet.Cells[i, 7].Value != null && workSheet.Cells[i, 5].Value != null)
                     {
-                        Token = workSheet.Cells[i, 1].Value.ToString(),
-                        FirstName = workSheet.Cells[i, 2].Value.ToString(),
-                        Address = workSheet.Cells[i, 3].Value.ToString(),
-                        PhoneNumber = workSheet.Cells[i, 4].Value.ToString(),
-                        Gender = Convert.ToInt16( workSheet.Cells[i, 5].Value),
-                        ChannelId = Convert.ToInt16(workSheet.Cells[i, 6].Value),
-
-                    });
+                         duplicateRegistrationInfo = _unitOfWork.Students.GetAll().Where(di => di.PhoneNumber == workSheet.Cells[i, 7].Value.ToString() && di.ChannelId == Convert.ToInt16(workSheet.Cells[i, 5].Value)).FirstOrDefault();
+                    }
+                    if (duplicateRegistrationInfo == null )
+                    {
+                        studentList.Add(new StudentRegistrationInfo
+                        {
+                            Token = workSheet.Cells[i, 1].Value != null ? workSheet.Cells[i, 1].Value.ToString() : string.Empty,
+                            FirstName = workSheet.Cells[i, 2].Value != null ? workSheet.Cells[i, 2].Value.ToString() : string.Empty,
+                            MiddleName = workSheet.Cells[i, 3].Value != null ? workSheet.Cells[i, 3].Value.ToString() : string.Empty,
+                            LastName = workSheet.Cells[i, 4].Value != null ? workSheet.Cells[i, 4].Value.ToString() : string.Empty,
+                            ChannelId = Convert.ToInt16(workSheet.Cells[i, 5].Value),
+                            Address = workSheet.Cells[i, 6].Value != null ? workSheet.Cells[i, 6].Value.ToString() : string.Empty,
+                            PhoneNumber = workSheet.Cells[i, 7].Value != null ? workSheet.Cells[i, 7].Value.ToString() : string.Empty,
+                            Email = workSheet.Cells[i, 8].Value != null ? workSheet.Cells[i, 8].Value.ToString() : string.Empty,
+                            Gender = Convert.ToInt16(workSheet.Cells[i, 9].Value),
+                            City = workSheet.Cells[i, 10].Value != null ? workSheet.Cells[i, 10].Value.ToString() : string.Empty,
+                            CompletedLevel = workSheet.Cells[i, 11].Value != null ? workSheet.Cells[i, 11].Value.ToString() : string.Empty,
+                            CompletedFaculty = workSheet.Cells[i, 12].Value != null ? workSheet.Cells[i, 12].Value.ToString() : string.Empty,
+                            IntrestedFaculty = workSheet.Cells[i, 13].Value != null ? workSheet.Cells[i, 13].Value.ToString() : string.Empty,
+                            Percentage = workSheet.Cells[i, 14].Value != null ? workSheet.Cells[i, 14].Value.ToString() : string.Empty,
+                        });
+                    }
                 }
 
                 _unitOfWork.Students.AddRange(studentList);
                 _unitOfWork.SaveChanges();
-                return Ok(studentList);
+                List<StudentRegistrationInfo> studentRegistrationInfo = _unitOfWork.Students.GetAll().ToList();
+                return Ok(studentRegistrationInfo);
             }
         }
         

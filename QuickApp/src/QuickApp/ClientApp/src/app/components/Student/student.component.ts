@@ -7,6 +7,7 @@ import { Component, OnInit, AfterViewInit, TemplateRef, ViewChild, Input } from 
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { fadeInOut } from '../../services/animations';
 import { StudentRegistration } from '../../models/student-registration-model';
+import { StudentEditRegistration } from '../../models/student.edit.model';
 import { AlertService, DialogType, MessageSeverity } from '../../services/alert.service';
 import { ConfigurationService } from '../../services/configuration.service';
 import { StudentRegistrationService } from '../../services/student-registration-service';
@@ -26,7 +27,7 @@ export class StudentComponent {
   rows: StudentRegistration[] = [];
   rowsCache: StudentRegistration[] = [];
   editingUserName: { name: string };
-  editedStudent: StudentRegistration;
+  editedStudent: StudentEditRegistration;
   sourceStudent: StudentRegistration;
   loadingIndicator: boolean;
   private isSaving = false;
@@ -75,7 +76,7 @@ export class StudentComponent {
       { prop: 'Token', name: "Token", width: 50, cellTemplate: this.tokenTemplate },
       { prop: 'FirstName', name: "FirstName", width: 90, cellTemplate: this.firstNameTemplate },
       { prop: 'MiddleName', name: "MiddleName", width: 120, cellTemplate: this.middleNameTemplate },
-      { prop: 'LastName', name: "LastName", width: 120, cellTemplate: this.middleNameTemplate },
+      { prop: 'LastName', name: "LastName", width: 120, cellTemplate: this.lastNameTemplate },
       { prop: 'Email', name: "Email", width: 140, cellTemplate: this.emailTemplate },
       { prop: 'Address', name: "Address", width: 140, cellTemplate: this.addressTemplate }
     ];

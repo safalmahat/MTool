@@ -18,6 +18,8 @@ namespace DAL
         IStudentRepository Students{ get; }
         IProductRepository Products { get; }
         IOrdersRepository Orders { get; }
+        IChannelRepository Channel { get; }
+        IEnquiryListRepository EnquiryList { get; }
 
 
         int SaveChanges();

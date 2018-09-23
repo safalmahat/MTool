@@ -4,10 +4,11 @@ using System.Text;
 
 namespace DAL.Models
 {
-    public class Channel : AuditableEntity
+   public class EnquiryList : AuditableEntity
     {
-
         public int Id { get; set; }
-        public string ChannelName { get; set; }
+        public int StudentId { get; set; }
+        public int ChannelId { get; set; }
     }
 }
+
