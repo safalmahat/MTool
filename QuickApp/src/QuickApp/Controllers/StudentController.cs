@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OfficeOpenXml;
 using OpenIddict.Validation;
+using QuickApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,6 +29,28 @@ namespace QuickApp.Controllers
             _unitOfWork = unitOfWork;
             _logger = logger;
         }
+        [HttpPost("MarketingPost")]
+
+        public IActionResult MarketingPost([FromBody]MarketingStudentVModel item)
+        {
+            IEnumerable<int> registeredStudent = _unitOfWork.Students.GetAll().Select(a => a.Id);
+            var seletedStudents = registeredStudent.Take(Convert.ToInt16(item.NumberOfStudents));
+            List<MarketingStudentList> marketingStudentList = new List<MarketingStudentList>();
+            foreach (var seletedStudent in seletedStudents)
+            {
+                MarketingStudentList marketingStudent = new MarketingStudentList()
+                {
+                    StudentId = seletedStudent,
+                    UserId = item.UserId
+
+                };
+                marketingStudentList.Add(marketingStudent);
+            }
+            _unitOfWork.MarketingStudentList.AddRange(marketingStudentList);
+
+            return Ok(item);
+        }
+
         [HttpPost]
         public IActionResult Post([FromBody]StudentRegistrationInfo item)
         {
@@ -145,6 +168,5 @@ namespace QuickApp.Controllers
 
             return " Student list has been exported successfully";
         }
-
     }
 }

@@ -23,7 +23,7 @@ namespace DAL
         IStudentRepository _students;
         IChannelRepository _channel;
         IEnquiryListRepository _enquiryList;
-
+        IMarketingStudentRepository _marketingStudentList;
 
 
         public UnitOfWork(ApplicationDbContext context)
@@ -100,6 +100,18 @@ namespace DAL
                     _enquiryList = new EnquiryListRepository(_context);
 
                 return _enquiryList;
+            }
+
+        }
+
+        public IMarketingStudentRepository MarketingStudentList
+        {
+            get
+            {
+                if (_marketingStudentList == null)
+                    _marketingStudentList = new MarketingStudentRepository(_context);
+
+                return _marketingStudentList;
             }
 
         }

@@ -14,6 +14,9 @@ import { StudentRegistrationService } from '../../services/student-registration-
 import { AppTranslationService } from '../../services/app-translation.service';
 import { Utilities } from '../../services/utilities';
 import { StudentdetailregistrationComponent } from "../studentdetailregistration/studentdetailregistration.component";
+import { AccountService } from '../../services/account.service';
+import { User } from '../../models/user.model';
+import { MarketingStudentList } from '../../models/marketingstudent.model';
 @Component({
   selector: 'student',
   templateUrl: './student.component.html',
@@ -21,6 +24,8 @@ import { StudentdetailregistrationComponent } from "../studentdetailregistration
   animations: [fadeInOut]
 })
 export class StudentComponent {
+  private users: User[] = [];
+  private marketingStudentList: MarketingStudentList = new MarketingStudentList();
   student = new StudentRegistration();
   isLoading = false;
   columns: any[] = [];
@@ -63,7 +68,7 @@ export class StudentComponent {
   @ViewChild('studentDetail')
   studentDetail: StudentdetailregistrationComponent;
 
-  constructor(private alertService: AlertService, private translationService: AppTranslationService, private configurations: ConfigurationService, private studentService: StudentRegistrationService) {
+  constructor(private alertService: AlertService, private translationService: AppTranslationService, private configurations: ConfigurationService, private studentService: StudentRegistrationService, private accountService: AccountService) {
 
   }
 
@@ -104,7 +109,6 @@ export class StudentComponent {
     };
 }
 addNewStudentrToList() {
-  debugger;
   if (this.sourceStudent) {
       Object.assign(this.sourceStudent, this.editedStudent);
 
@@ -141,6 +145,25 @@ addNewStudentrToList() {
     this.alertService.startLoadingMessage();
     this.loadingIndicator = true;
     this.studentService.getAllStudent().subscribe(students => this.onDataLoadSuccessful(students)), error => this.onDataLoadFailed(error);
+    this.accountService.getUsersAndRoles()
+    .subscribe(results => {
+        this.alertService.stopLoadingMessage();
+        this.loadingIndicator = false;
+        this.users =  results[0].filter(a => a.roles.includes('Marketing'))
+       
+        this.users.forEach((user, index, users) => {
+            (<any>user).index = index + 1;
+        });
+
+    },
+    error => {
+        this.alertService.stopLoadingMessage();
+        this.loadingIndicator = false;
+
+        this.alertService.showStickyMessage("Load Error", `Unable to retrieve roles from the server.\r\nErrors: "${Utilities.getHttpResponseMessage(error)}"`,
+            MessageSeverity.error, error);
+    });
+ 
   }
 
   importStudentData() {
@@ -182,6 +205,26 @@ addNewStudentrToList() {
     this.sourceStudent = null;
     this.editedStudent = this.studentDetail.newUser();
     this.editorModal.show();
+}
+
+
+private onAssignStudentClick() {
+  this.isSaving = true;
+  this.alertService.startLoadingMessage("Assigning students...");
+  this.studentService.assignStudent(this.marketingStudentList).subscribe(marketing => this.saveSuccessHelper(marketing), error => this.saveFailedHelper(error));
+
+}
+private saveSuccessHelper(marketingStudent?: MarketingStudentList) {
+  this.isSaving = false;
+  this.alertService.stopLoadingMessage();
+  this.alertService.showStickyMessage("Save Success", "Students assigned to marketing sucessfully:", MessageSeverity.success);
+}
+
+
+private saveFailedHelper(error: any) {
+  this.isSaving = false;
+  this.alertService.stopLoadingMessage();
+  this.alertService.showStickyMessage("Assingning Error", "The below errors occured whilst assigning your changes:", MessageSeverity.error, error);
 }
 
 }

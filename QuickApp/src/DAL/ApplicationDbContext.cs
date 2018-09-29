@@ -27,6 +27,8 @@ namespace DAL
         public DbSet<EnquiryList> EnquiryList { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<StudentRegistrationInfo> StudentRegistrationInfo { get; set; }
+        public DbSet<MarketingStudentList> MarketingStudentList { get; set; }
+
 
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
@@ -68,6 +70,9 @@ namespace DAL
             builder.Entity<StudentRegistrationInfo>().ToTable($"{nameof(this.StudentRegistrationInfo)}");
             builder.Entity<Channel>().ToTable($"{nameof(this.Channel)}");
             builder.Entity<EnquiryList>().ToTable($"{nameof(this.EnquiryList)}");
+
+            builder.Entity<MarketingStudentList>().ToTable($"{nameof(this.MarketingStudentList)}");
+
             builder.Entity<Channel>().HasData(
                              new {Id = 1, ChannelName = "Other", UpdatedDate = new DateTime(), CreatedDate = new DateTime() });
         }

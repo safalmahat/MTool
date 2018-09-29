@@ -21,6 +21,7 @@ import { User } from '../models/user.model';
 import { Permission, PermissionNames, PermissionValues } from '../models/permission.model';
 import { StudentRegistration } from '../models/student-registration-model';
 import { StudentEndpoint } from './student-registration-endpoint-.service';
+import { MarketingStudentList } from '../models/marketingstudent.model';
 
 @Injectable()
 export class StudentRegistrationService {
@@ -41,6 +42,11 @@ export class StudentRegistrationService {
   saveStudent(studuent: StudentRegistration) {
     return this.studentEndpoint.save<StudentRegistration>(studuent);
   }
+
+  assignStudent(marketing: MarketingStudentList) {
+    return this.studentEndpoint.assignStudent<MarketingStudentList>(marketing);
+  }
+
 
   getAllStudent() {
     return this.studentEndpoint.getAllStudentEndpoint<StudentRegistration[]>();

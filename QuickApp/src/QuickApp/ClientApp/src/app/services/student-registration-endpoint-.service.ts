@@ -16,6 +16,7 @@ import { ConfigurationService } from './configuration.service';
 export class StudentEndpoint extends EndpointFactory {
 
   private readonly _studentUrl: string = "/api/student";
+  private readonly _marketingStudentUrl: string = "/api/student/MarketingPost";
   private readonly _userByUserNameUrl: string = "/api/account/users/username";
   private readonly _currentUserUrl: string = "/api/account/users/me";
   private readonly _currentUserPreferencesUrl: string = "/api/account/users/me/preferences";
@@ -33,6 +34,7 @@ export class StudentEndpoint extends EndpointFactory {
   get rolesUrl() { return this.configurations.baseUrl + this._rolesUrl; }
   get roleByRoleNameUrl() { return this.configurations.baseUrl + this._roleByRoleNameUrl; }
   get permissionsUrl() { return this.configurations.baseUrl + this._permissionsUrl; }
+  get marketingStudentIUrl() { return this.configurations.baseUrl + this._marketingStudentUrl; }
 
 
 
@@ -46,6 +48,14 @@ export class StudentEndpoint extends EndpointFactory {
     return this.http.post<T>(this.studentUrl, JSON.stringify(studentObject), this.getRequestHeaders()).pipe<T>(
       catchError(error => {
         return this.handleError(error, () => this.save(studentObject));
+      }));
+  }
+
+  assignStudent<T>(marketingStudentObject: any): Observable<T> {
+
+    return this.http.post<T>(this.marketingStudentIUrl, JSON.stringify(marketingStudentObject), this.getRequestHeaders()).pipe<T>(
+      catchError(error => {
+        return this.handleError(error, () => this.save(marketingStudentObject));
       }));
   }
   getAllStudentEndpoint<T>(page?: number, pageSize?: number): Observable<T> {

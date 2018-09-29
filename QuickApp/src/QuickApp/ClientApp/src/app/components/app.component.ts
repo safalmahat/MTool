@@ -121,7 +121,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
-    debugger;
     this.isUserLoggedIn = this.authService.isLoggedIn;
 
     // 1 sec to ensure all the effort to get the css animation working is appreciated :|, Preboot screen is removed .5 sec later

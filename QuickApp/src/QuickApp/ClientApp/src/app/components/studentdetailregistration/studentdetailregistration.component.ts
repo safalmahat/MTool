@@ -38,15 +38,12 @@ export class StudentdetailregistrationComponent implements OnInit {
   ngOnInit() {
   }
   private save() {
-    debugger;
     this.isSaving = true;
     this.alertService.startLoadingMessage("Saving changes...");
-    debugger;
     this.studentService.saveStudent(this.student).subscribe(student => this.saveSuccessHelper(student), error => this.saveFailedHelper(error));
 
   }
   private saveSuccessHelper(student?: StudentRegistration) {
-    debugger;
     this.isSaving = false;
     if (student)
     Object.assign(this.studentEdit, student);
@@ -78,13 +75,11 @@ export class StudentdetailregistrationComponent implements OnInit {
     }
 }
 newUser() {
-  debugger;
   this.isGeneralEditor = true;
   this.edit();
   return this.studentEdit;
 }
 private edit() {
-  debugger;
   if (!this.isGeneralEditor) {
       this.studentEdit = new StudentEditRegistration();
       Object.assign(this.studentEdit, this.student);
