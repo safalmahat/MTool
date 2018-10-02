@@ -39,6 +39,7 @@ export class RoleEditorComponent {
 
 
     constructor(private alertService: AlertService, private accountService: AccountService) {
+        debugger;
     }
 
 

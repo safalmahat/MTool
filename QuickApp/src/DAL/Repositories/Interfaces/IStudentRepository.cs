@@ -7,5 +7,6 @@ namespace DAL.Repositories.Interfaces
 {
    public interface IStudentRepository : IRepository<StudentRegistrationInfo>
     {
+        IEnumerable<StudentRegistrationInfo> GetStudentRegistrationInfos(string userID);
     }
 }

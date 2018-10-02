@@ -17,6 +17,7 @@ import { StudentdetailregistrationComponent } from "../studentdetailregistration
 import { AccountService } from '../../services/account.service';
 import { User } from '../../models/user.model';
 import { MarketingStudentList } from '../../models/marketingstudent.model';
+import { Permission } from '../../models/permission.model';
 @Component({
   selector: 'student',
   templateUrl: './student.component.html',
@@ -225,6 +226,11 @@ private saveFailedHelper(error: any) {
   this.isSaving = false;
   this.alertService.stopLoadingMessage();
   this.alertService.showStickyMessage("Assingning Error", "The below errors occured whilst assigning your changes:", MessageSeverity.error, error);
+}
+
+get canAssignStudent() {
+  var result = this.accountService.userHasPermission(Permission.assignStudentsPermission); //eg. viewProductsPermission
+  return result;
 }
 
 }

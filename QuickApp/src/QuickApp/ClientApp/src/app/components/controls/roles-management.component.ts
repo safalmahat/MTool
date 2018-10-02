@@ -125,6 +125,7 @@ export class RolesManagementComponent implements OnInit, AfterViewInit {
 
         this.accountService.getRolesAndPermissions()
             .subscribe(results => {
+                debugger;
                 this.alertService.stopLoadingMessage();
                 this.loadingIndicator = false;
 

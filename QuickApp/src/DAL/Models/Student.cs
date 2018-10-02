@@ -23,5 +23,6 @@ namespace DAL.Models
         public string Percentage { get; set; }
         public DateTime DateCreated { get; set; } = new DateTime();
         public DateTime DateModified { get; set; } = new DateTime();
+
     }
 }

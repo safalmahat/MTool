@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OfficeOpenXml;
 using OpenIddict.Validation;
+using QuickApp.Helpers;
 using QuickApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,6 @@ namespace QuickApp.Controllers
             _logger = logger;
         }
         [HttpPost("MarketingPost")]
-
         public IActionResult MarketingPost([FromBody]MarketingStudentVModel item)
         {
             IEnumerable<int> registeredStudent = _unitOfWork.Students.GetAll().Select(a => a.Id);
@@ -41,12 +41,14 @@ namespace QuickApp.Controllers
                 MarketingStudentList marketingStudent = new MarketingStudentList()
                 {
                     StudentId = seletedStudent,
-                    UserId = item.UserId
+                    UserId = item.UserId,
+                    CreatedDate = new DateTime()
 
                 };
                 marketingStudentList.Add(marketingStudent);
             }
             _unitOfWork.MarketingStudentList.AddRange(marketingStudentList);
+            _unitOfWork.SaveChanges();
 
             return Ok(item);
         }
@@ -71,10 +73,14 @@ namespace QuickApp.Controllers
             return Ok(item);
         }
         [HttpGet]
-        public  IActionResult Get()
+        public IActionResult Get()
         {
-
-            return Ok(_unitOfWork.Students.GetAll());
+           string[] userRoles =  Utilities.GetRoles(this.User);
+            if (userRoles.Contains("administrator"))
+            
+                return Ok(_unitOfWork.Students.GetAll());
+            else
+                 return Ok(_unitOfWork.Students.GetStudentRegistrationInfos(Utilities.GetUserId(this.User)));
         }
         [HttpGet]
         [Route("ImportStudents")]

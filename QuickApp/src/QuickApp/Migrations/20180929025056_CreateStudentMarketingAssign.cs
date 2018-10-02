@@ -17,14 +17,14 @@ namespace QuickApp.Migrations
                     UpdatedBy = table.Column<string>(maxLength: 256, nullable: true),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
-                    Id = table.Column<int>(nullable: false)
+                    MarketingStudentListId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     StudentId = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MarketingStudentList", x => x.Id);
+                    table.PrimaryKey("PK_MarketingStudentList", x => x.MarketingStudentListId);
                 });
         }
 
