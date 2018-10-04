@@ -33,8 +33,8 @@ namespace QuickApp.Controllers
         [HttpPost("MarketingPost")]
         public IActionResult MarketingPost([FromBody]MarketingStudentVModel item)
         {
-            IEnumerable<int> registeredStudent = _unitOfWork.Students.GetAll().Select(a => a.Id);
-            var seletedStudents = registeredStudent.Take(Convert.ToInt16(item.NumberOfStudents));
+            IEnumerable<int> seletedStudents = _unitOfWork.Students.GetUnregisteredStudentsID(Convert.ToInt16(item.NumberOfStudents));
+ 
             List<MarketingStudentList> marketingStudentList = new List<MarketingStudentList>();
             foreach (var seletedStudent in seletedStudents)
             {

@@ -21,7 +21,7 @@ namespace DAL.Repositories
             _appContext.StudentRegistrationInfo.Add(item);
             _appContext.SaveChanges();
         }
-      
+
 
         public IEnumerable<StudentRegistrationInfo> GetStudentRegistrationInfos(string userID)
         {
@@ -31,6 +31,18 @@ namespace DAL.Repositories
                                            where e.UserId == userID
                                            select p).ToList();
             return studentRegistrationInfo;
+        }
+
+        public IEnumerable<int> GetUnregisteredStudentsID(int toAssignNumber)
+        {
+            IEnumerable<int> registeredStudent = (from ep in _appContext.StudentRegistrationInfo
+                                                  join e in _appContext.MarketingStudentList on ep.Id equals e.StudentId into gj
+                                                  from x in gj.DefaultIfEmpty()
+                                                  where x.StudentId == null
+                                                  select ep.Id
+             ).Take(toAssignNumber);
+            return registeredStudent;
+
         }
 
         private ApplicationDbContext _appContext => (ApplicationDbContext)_context;
