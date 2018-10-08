@@ -80,16 +80,11 @@
       {{row.email}}
     </span>
   </ng-template>
-  <ng-template #addressTemplate let-row="row" let-value="value">
-    <span [class.locked-out]="row.isLockedOut" [class.user-disabled]="!row.isEnabled">
-      <i *ngIf="row.isLockedOut" class="fa fa-exclamation-triangle"> </i>
-      {{row.address}}
-    </span>
-  </ng-template>
+
 
 
   <ng-template #actionsTemplate let-row="row" let-value="value" let-i="index">
-    <div *ngIf="canManageUsers">
+    <div >
       <a class="btn btn-link btn-xs" href="javascript:;" (click)="editUser(row)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
       |
       <a class="btn btn-link btn-xs" href="javascript:;" (click)="deleteUser(row)"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>

@@ -75,9 +75,8 @@ namespace QuickApp.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-           string[] userRoles =  Utilities.GetRoles(this.User);
+            string[] userRoles =  Utilities.GetRoles(this.User);
             if (userRoles.Contains("administrator"))
-            
                 return Ok(_unitOfWork.Students.GetAll());
             else
                  return Ok(_unitOfWork.Students.GetStudentRegistrationInfos(Utilities.GetUserId(this.User)));
