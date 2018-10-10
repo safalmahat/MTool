@@ -67,6 +67,7 @@ import { StudentRegistrationService } from "./services/student-registration-serv
 import { StudentEndpoint } from "./services/student-registration-endpoint-.service";
 import { StudentComponent } from "./components/Student/student.component";
 import { StudentdetailregistrationComponent } from './components/studentdetailregistration/studentdetailregistration.component';
+import { StudentfollowupComponent } from './components/studentfollowup/studentfollowup.component';
 
 
  
@@ -117,7 +118,8 @@ import { StudentdetailregistrationComponent } from './components/studentdetailre
     BootstrapSelectDirective,
     BootstrapDatepickerDirective,
     GroupByPipe,
-    StudentdetailregistrationComponent
+    StudentdetailregistrationComponent,
+    StudentfollowupComponent
    
   ],
   providers: [

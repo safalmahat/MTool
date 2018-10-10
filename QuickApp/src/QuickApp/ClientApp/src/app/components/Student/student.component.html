@@ -5,20 +5,20 @@
       <div class="form-group search-box">
         <search-box (searchChange)="onSearchChanged($event)" placeholder="{{'users.management.Search' | translate}}">></search-box>
       </div>
-      <div  *ngIf="canAssignStudent"  class="form-group">
-          <label>Number of students: </label>
-          <input type="text" [(ngModel)]="marketingStudentList.NumberOfStudents"  name="studentNumbers"  placeholder="Enter number of student to assign"
-          class="form-control" />
+      <div *ngIf="canAssignStudent" class="form-group">
+        <label>Number of students: </label>
+        <input type="text" [(ngModel)]="marketingStudentList.NumberOfStudents" name="studentNumbers" placeholder="Enter number of student to assign"
+               class="form-control" />
         <label>Users: </label>
         <!-- (change)="filterForeCasts($event.target.value)" -->
-        <select  [(ngModel)]="marketingStudentList.UserId"  bootstrapSelect class="selectpicker form-control">
-            <option value="0">--All--</option>
-            <option *ngFor="let user of users" value={{user.id}}>
-                {{user.fullName}}
-            </option>
+        <select [(ngModel)]="marketingStudentList.UserId" bootstrapSelect class="selectpicker form-control">
+          <option value="0">--All--</option>
+          <option *ngFor="let user of users" value={{user.id}}>
+            {{user.fullName}}
+          </option>
         </select>
-        <button (click)="onAssignStudentClick()" class="btn btn-success unblock-user" ><i class="fa fa-share"></i> Assign </button>
-    </div>
+        <button (click)="onAssignStudentClick()" class="btn btn-success unblock-user"><i class="fa fa-share"></i> Assign </button>
+      </div>
     </div>
     <div class="col-sm-4">
       <div class="navbar action-box">
@@ -28,7 +28,7 @@
               <i class="fa fa-plus-circle"></i> {{'users.management.NewUser' | translate}}
             </a>
             <a href="javascript:;" (click)="importStudentData()">
-              <i class="fas fa-file-excel"></i> Import 
+              <i class="fas fa-file-excel"></i> Import
             </a>
           </li>
         </ul>
@@ -80,19 +80,12 @@
       {{row.email}}
     </span>
   </ng-template>
-  <ng-template #addressTemplate let-row="row" let-value="value">
-    <span [class.locked-out]="row.isLockedOut" [class.user-disabled]="!row.isEnabled">
-      <i *ngIf="row.isLockedOut" class="fa fa-exclamation-triangle"> </i>
-      {{row.address}}
-    </span>
-  </ng-template>
+
 
 
   <ng-template #actionsTemplate let-row="row" let-value="value" let-i="index">
-    <div *ngIf="canManageUsers">
-      <a class="btn btn-link btn-xs" href="javascript:;" (click)="editUser(row)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
-      |
-      <a class="btn btn-link btn-xs" href="javascript:;" (click)="deleteUser(row)"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+    <div *ngIf="canAssignStudent">
+      <a class="btn btn-link btn-xs" href="javascript:;" (click)="followUpStudent(row)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Follow Up</a>
     </div>
   </ng-template>
 
@@ -105,11 +98,29 @@
           <button type="button" class="close pull-right" title="Close" (click)="editorModal.hide()">
             <span aria-hidden="true">&times;</span>
           </button>
-        </div> 
+        </div>
         <div class="modal-body">
           <app-studentdetailregistration #studentDetail [isGeneralEditor]="true"></app-studentdetailregistration>
         </div>
       </div>
     </div>
   </div>
+  <div class="modal fade" bsModal #followModal="bs-modal" (onHidden)="onFollowModalHidden()" [config]="{backdrop: 'static'}" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title pull-left"><i class="fa fa-user-circle-o"></i> Student Followup</h4>
+          <button type="button" class="close pull-right" title="Close" (click)="followModal.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <app-studentfollowup #followUp [isGeneralEditor]="true"></app-studentfollowup>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+

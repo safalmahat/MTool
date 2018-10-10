@@ -19,7 +19,7 @@ namespace QuickApp.Controllers
 {
     [Authorize(AuthenticationSchemes = OpenIddictValidationDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
-    public class StudentController:Controller
+    public class StudentController : Controller
     {
         private readonly IHostingEnvironment _hostingEnvironment;
         private IUnitOfWork _unitOfWork;
@@ -34,7 +34,7 @@ namespace QuickApp.Controllers
         public IActionResult MarketingPost([FromBody]MarketingStudentVModel item)
         {
             IEnumerable<int> seletedStudents = _unitOfWork.Students.GetUnregisteredStudentsID(Convert.ToInt16(item.NumberOfStudents));
- 
+
             List<MarketingStudentList> marketingStudentList = new List<MarketingStudentList>();
             foreach (var seletedStudent in seletedStudents)
             {
@@ -65,22 +65,21 @@ namespace QuickApp.Controllers
                 {
                     StudentId = item.Id,
                     ChannelId = registeredStudent.ChannelId
-                    
+
                 };
                 _unitOfWork.EnquiryList.Add(enquiryList);
             }
-        
+
             return Ok(item);
         }
         [HttpGet]
         public IActionResult Get()
         {
-           string[] userRoles =  Utilities.GetRoles(this.User);
+            string[] userRoles = Utilities.GetRoles(this.User);
             if (userRoles.Contains("administrator"))
-            
                 return Ok(_unitOfWork.Students.GetAll());
             else
-                 return Ok(_unitOfWork.Students.GetStudentRegistrationInfos(Utilities.GetUserId(this.User)));
+                return Ok(_unitOfWork.Students.GetStudentRegistrationInfos(Utilities.GetUserId(this.User)));
         }
         [HttpGet]
         [Route("ImportStudents")]
@@ -99,12 +98,12 @@ namespace QuickApp.Controllers
 
                 for (int i = 2; i <= totalRows; i++)
                 {
-                    StudentRegistrationInfo duplicateRegistrationInfo =null;
+                    StudentRegistrationInfo duplicateRegistrationInfo = null;
                     if (workSheet.Cells[i, 7].Value != null && workSheet.Cells[i, 5].Value != null)
                     {
-                         duplicateRegistrationInfo = _unitOfWork.Students.GetAll().Where(di => di.PhoneNumber == workSheet.Cells[i, 7].Value.ToString() && di.ChannelId == Convert.ToInt16(workSheet.Cells[i, 5].Value)).FirstOrDefault();
+                        duplicateRegistrationInfo = _unitOfWork.Students.GetAll().Where(di => di.PhoneNumber == workSheet.Cells[i, 7].Value.ToString() && di.ChannelId == Convert.ToInt16(workSheet.Cells[i, 5].Value)).FirstOrDefault();
                     }
-                    if (duplicateRegistrationInfo == null )
+                    if (duplicateRegistrationInfo == null)
                     {
                         studentList.Add(new StudentRegistrationInfo
                         {
@@ -132,7 +131,7 @@ namespace QuickApp.Controllers
                 return Ok(studentRegistrationInfo);
             }
         }
-        
+
         [HttpGet]
         [Route("ExportStudent")]
         public string ExportStudent()

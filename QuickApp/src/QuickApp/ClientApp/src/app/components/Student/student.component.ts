@@ -13,10 +13,12 @@ import { ConfigurationService } from '../../services/configuration.service';
 import { StudentRegistrationService } from '../../services/student-registration-service';
 import { AppTranslationService } from '../../services/app-translation.service';
 import { Utilities } from '../../services/utilities';
+import { StudentfollowupComponent } from "../studentfollowup/studentfollowup.component";
 import { StudentdetailregistrationComponent } from "../studentdetailregistration/studentdetailregistration.component";
 import { AccountService } from '../../services/account.service';
 import { User } from '../../models/user.model';
 import { MarketingStudentList } from '../../models/marketingstudent.model';
+import { StudentFollowUpModel } from '../../models/student-followup-model';
 import { Permission } from '../../models/permission.model';
 @Component({
   selector: 'student',
@@ -34,6 +36,7 @@ export class StudentComponent {
   rowsCache: StudentRegistration[] = [];
   editingUserName: { name: string };
   editedStudent: StudentEditRegistration;
+  followUpStudentData : StudentFollowUpModel;
   sourceStudent: StudentRegistration;
   loadingIndicator: boolean;
   private isSaving = false;
@@ -66,8 +69,14 @@ export class StudentComponent {
   @ViewChild('editorModal')
   editorModal: ModalDirective;
 
+  @ViewChild('followModal')
+  followModal: ModalDirective;
+
   @ViewChild('studentDetail')
   studentDetail: StudentdetailregistrationComponent;
+
+  @ViewChild('followUp')
+  followUp: StudentfollowupComponent;
 
   constructor(private alertService: AlertService, private translationService: AppTranslationService, private configurations: ConfigurationService, private studentService: StudentRegistrationService, private accountService: AccountService) {
 
@@ -197,6 +206,11 @@ addNewStudentrToList() {
    // this.editingUserName = null;
     this.studentDetail.resetForm(true);
    }
+   
+   onFollowModalHidden() {
+    // this.editingUserName = null;
+    // this.followUp.resetForm(true);
+    }
   onSearchChanged(value: string) {
     this.rows = this.rowsCache.filter(r => Utilities.searchArray(value, false, r.FirstName, r.LastName, r.Token));
   }
@@ -206,6 +220,12 @@ addNewStudentrToList() {
     this.sourceStudent = null;
     this.editedStudent = this.studentDetail.newUser();
     this.editorModal.show();
+}
+followUpStudent(row: StudentFollowUpModel) {
+  // this.editingRoleName = { name: row.name };
+  //  this.sourceRole = row;
+  this.followUpStudentData = this.followUp.followUpStudent(row);
+  this.followModal.show();
 }
 
 
